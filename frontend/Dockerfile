@@ -1,13 +1,12 @@
-# Construindo o app React
-FROM node:18 AS build
+# Build do React
+FROM node:18 as build
 WORKDIR /app
-COPY frontend/ .
-RUN npm install
-RUN npm run build
+COPY . .
+RUN npm install && npm run build
 
-# Servindo com Nginx
+# NGINX para servir o frontend
 FROM nginx:alpine
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

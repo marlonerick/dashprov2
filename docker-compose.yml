@@ -1,9 +1,9 @@
 version: "3"
 services:
   frontend:
-    build: .
+    build: ./frontend
     ports:
-      - "80:80"
+      - "80:5173"
     depends_on:
       - backend
 
