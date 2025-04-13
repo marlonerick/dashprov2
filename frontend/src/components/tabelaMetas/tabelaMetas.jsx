@@ -25,7 +25,7 @@ export default function MetasDashboard() {
 
   const carregarMetas = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/metas");
+      const response = await fetch("https://backenddashboard.fly.dev/api/metas");
       const data = await response.json();
       setMetas(data);
     } catch (error) {
@@ -52,8 +52,8 @@ export default function MetasDashboard() {
 
       if (response.ok) {
         carregarMetas();
-        const data = await response.json();
-        console.log("Meta cadastrada com sucesso:", data);
+        // const data = await response.json();
+        // console.log("Meta cadastrada com sucesso:", data);
       } else {
         console.error("Erro ao salvar meta");
       }

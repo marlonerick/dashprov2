@@ -1,0 +1,26 @@
+# fly.toml app configuration file generated for backenddashboard on 2025-04-07T10:36:36-03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'backenddashboard'
+primary_region = 'gru'
+
+[build]
+
+[[mounts]]
+  source = 'data_volume'
+  destination = '/database'
+
+[http_service]
+  internal_port = 3001
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

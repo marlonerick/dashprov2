@@ -36,8 +36,8 @@ export function ModalAdicionarEncomenda({ onClose, onSave }) {
         );
       }
 
-      const data = await response.json();
-      console.log("Venda cadastrada com sucesso:", data);
+      // const data = await response.json();
+      // console.log("Venda cadastrada com sucesso:", data);
 
       onSave(); // Atualiza a tabela após cadastro
       onClose(); // Fecha o modal

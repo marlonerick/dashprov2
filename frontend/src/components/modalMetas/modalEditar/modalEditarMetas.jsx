@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 
 export function ModalEditarMetas({ metaSelecionada, onClose, onSave }) {
-  {
-    console.log(metaSelecionada);
-  }
+
   const [formData, setFormData] = useState({
     nome: "",
     forma_pagamento: "Dinheiro",
@@ -131,7 +129,7 @@ export function ModalEditarMetas({ metaSelecionada, onClose, onSave }) {
             <input
               type="date"
               name="data"
-              value={formData.data_pagamento} // Converte DD/MM/YYYY para YYYY-MM-DD
+              value={formData.data_pagamento.split("/").reverse().join("-")} // Converte DD/MM/YYYY para YYYY-MM-DD
               onChange={handleChange}
               className="w-full border p-2 rounded"
             />
