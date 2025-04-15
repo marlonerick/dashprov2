@@ -11,11 +11,14 @@ import {
 } from "lucide-react";
 
 import LogoHome from "../../assets/img/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export function Sidebar() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(()=>{
+    const savedState = localStorage.getItem('open');
+    return savedState ? JSON.parse(savedState) : false;
+  });
 
   const SideMenu = [
     {
@@ -68,6 +71,10 @@ export function Sidebar() {
     });
   };
 
+  useEffect(() => {
+    localStorage.setItem('open', JSON.stringify(open));
+  }, [open]);
+
   return (
     <>
       <div className="flex">
@@ -98,7 +105,7 @@ export function Sidebar() {
                 !open && "scale-0"
               }`}
             >
-              DASHBOARD FAMILIA
+              DASHBOARD
             </h1>
             <hr className="w-72 h-px my-2 bg-gray-200 border-0 dark:bg-white"></hr>
             <img

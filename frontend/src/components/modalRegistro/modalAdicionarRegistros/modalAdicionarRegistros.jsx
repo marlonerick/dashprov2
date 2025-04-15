@@ -2,12 +2,21 @@ import { useState } from "react";
 import moment from "moment";
 
 export function ModalAdicionarRegistros({ onClose, onSave }) {
+  const getDataHoje = () => {
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, "0");
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const ano = hoje.getFullYear();
+    return `${ano}-${mes}-${dia}`;
+
+  };
+
   const [formData, setFormData] = useState({
     nome: "",
     vulgo: "",
     id_cpf: "",
     telefone: "",
-    data_registro: "",
+    data_registro: getDataHoje(),
   });
 
   const handleChange = (e) => {

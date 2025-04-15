@@ -2,13 +2,22 @@ import { useState } from "react";
 import moment from 'moment';
 
 export function ModalAdicionarVendas({ onClose, onSave }) {
+  const getDataHoje = () => {
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, "0");
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const ano = hoje.getFullYear();
+    return `${ano}-${mes}-${dia}`;
+
+  };
+
   const [formData, setFormData] = useState({
     produto: "",
     quantidade: "",
     familia: "",
     valor: "",
     membro: "",
-    data_vendas: "",
+    data_vendas: getDataHoje(),
   });
 
   const handleChange = (e) => {
@@ -35,10 +44,6 @@ export function ModalAdicionarVendas({ onClose, onSave }) {
           errorData.error || "Erro desconhecido ao cadastrar venda"
         );
       }
-
-      const data = await response.json();
-      console.log("Venda cadastrada com sucesso:", data);
-
       onSave(); // Atualiza a tabela após cadastro
       onClose(); // Fecha o modal
     } catch (error) {
@@ -117,7 +122,7 @@ export function ModalAdicionarVendas({ onClose, onSave }) {
             <input
               type="date"
               name="data_vendas"
-              value={formData.data_vendas}
+              value={formData.data_vendas || getDataHoje()}
               onChange={handleChange}
               className="w-full border p-2 rounded"
               required

@@ -2,13 +2,21 @@ import { useState } from "react";
 import moment from "moment";
 
 export function ModalAdicionarEncomenda({ onClose, onSave }) {
+  const getDataHoje = () => {
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, "0");
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const ano = hoje.getFullYear();
+    return `${ano}-${mes}-${dia}`;
+  };
+
   const [formData, setFormData] = useState({
     nome: "",
     telefone: "",
     familia: "",
     produto: "",
     quantidade: "",
-    data: "",
+    data: getDataHoje(),
   });
 
   const handleChange = (e) => {
@@ -35,10 +43,6 @@ export function ModalAdicionarEncomenda({ onClose, onSave }) {
           errorData.error || "Erro desconhecido ao cadastrar acao"
         );
       }
-
-      // const data = await response.json();
-      // console.log("Venda cadastrada com sucesso:", data);
-
       onSave(); // Atualiza a tabela após cadastro
       onClose(); // Fecha o modal
     } catch (error) {

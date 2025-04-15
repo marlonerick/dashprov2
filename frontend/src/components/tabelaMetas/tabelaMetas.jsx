@@ -10,13 +10,20 @@ export default function MetasDashboard() {
 
   const [pagina, setPagina] = useState(1);
   const itensPorPagina = 10;
+  const getDataHoje = () => {
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, "0");
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const ano = hoje.getFullYear();
+    return `${ano}-${mes}-${dia}`;
+  };
 
   const [formData, setFormData] = useState({
     nome: "",
     forma_pagamento: "Dinheiro",
     valor_pago: "",
     item_entregue: "",
-    data_pagamento: "",
+    data_pagamento: getDataHoje(),
   });
 
   useEffect(() => {
@@ -25,7 +32,9 @@ export default function MetasDashboard() {
 
   const carregarMetas = async () => {
     try {
-      const response = await fetch("https://backenddashboard.fly.dev/api/metas");
+      const response = await fetch(
+        "https://backenddashboard.fly.dev/api/metas"
+      );
       const data = await response.json();
       setMetas(data);
     } catch (error) {
@@ -78,7 +87,10 @@ export default function MetasDashboard() {
 
   return (
     <>
-      <h2 className="text-xl font-bold my-4">Controle de Metas</h2>
+      <h2 className="mb-3 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-2xl dark:text-black">
+        CONTROLE DE METAS
+      </h2>
+      <hr class="w-full h-px my-3 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={adicionarOuEditarMeta} className="mb-4">
         <input
           type="text"
